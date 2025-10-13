@@ -1,26 +1,61 @@
+/* Tailwind v4: importa todo con una sola línea */
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* === Design tokens (marca MOVER YA) === */
+@theme {
+  /* Colores */
+  --color-brand: #0A2A6B;       /* Cobalto base */
+  --color-brand-700: #0A2A6B;
+  --color-brand-900: #071D4D;
+
+  --color-accent: #A8E600;      /* Verde lima */
+  --color-accent-600: #89C800;
+  --color-accent-700: #6DA300;
+
+  --color-ink: #1A2B3B;         /* Texto principal */
+  --color-ink-soft: #6B7280;    /* Texto secundario */
+
+  /* Radios y sombras */
+  --radius-xl2: 1.25rem;
+  --shadow-soft: 0 8px 28px rgba(10,42,107,0.10);
+  --shadow-card: 0 6px 18px rgba(10,42,107,0.08);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* === Base === */
+:root { color-scheme: light; }
+html, body { height: 100%; background: #F6F8FB; }
+* { -webkit-tap-highlight-color: transparent; }
+
+.safe-bottom { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+.bottom-safe-area { padding-bottom: env(safe-area-inset-bottom); }
+
+/* Tipografía y estados */
+@layer base {
+  body { @apply text-ink; }
+  a { @apply text-brand-900 underline-offset-4 hover:underline; }
+  ::placeholder { @apply text-gray-500; }
+  :focus-visible { @apply outline-none ring-2 ring-accent/60 ring-offset-2 ring-offset-white; }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Utilidades personalizadas */
+@utility card {
+  @apply bg-white border border-gray-200 rounded-xl2 shadow-card;
+}
+@utility icon-badge {
+  @apply inline-flex items-center justify-center w-10 h-10 rounded-full bg-brand/5 text-brand-900;
+}
+
+/* === Shell centrado tipo teléfono (desktop) === */
+@utility app-shell {
+  @apply mx-auto min-h-screen w-full bg-[#F6F8FB];
+  /* En desktop: ancho de teléfono + marco sutil */
+  @apply md:max-w-[420px] md:my-6 md:rounded-[24px] md:border md:border-gray-200;
+  box-shadow: 0 20px 60px rgba(10,42,107,0.12);
+}
+
+/* Opcional: fondo de la página un poco más oscuro para que destaque el shell en desktop */
+@layer base {
+  @media (min-width: 768px) {
+    body { background: #E9EDF3; }
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
