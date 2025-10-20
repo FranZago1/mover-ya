@@ -12,12 +12,14 @@ const tabs = [
 
 export default function BottomNav() {
   const pathname = usePathname();
-  // Ocultar en /bienvenido si querés mantener la pantalla limpia
   if (pathname.startsWith("/bienvenido")) return null;
 
   return (
-    <nav className="sticky bottom-0 z-30">
-      {/* Barra dentro del shell: card con borde y radio */}
+    <nav
+      className="fixed bottom-0 left-0 right-0 z-50"
+      style={{ paddingBottom: "env(safe-area-inset-bottom)" }} // iOS safe area
+      aria-label="Navegación inferior"
+    >
       <div className="mx-auto max-w-[420px] px-3">
         <div className="bg-white border border-gray-200 rounded-t-2xl shadow-card">
           <div className="grid grid-cols-4">

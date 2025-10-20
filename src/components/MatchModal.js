@@ -19,7 +19,6 @@ export default function MatchModal({ open, onClose, data }) {
         costo: data.costo,
         estado: "Confirmado",
         fecha: new Date().toISOString(),
-        // extras para el detalle
         route: data.route,
         window: data.window,
         capacity: data.capacity,
@@ -33,7 +32,8 @@ export default function MatchModal({ open, onClose, data }) {
   };
 
   return (
-    <div role="dialog" aria-modal="true" className="fixed inset-0 z-40 flex items-end sm:items-center justify-center">
+    // ⬇️ z-index MUY alto para quedar arriba de panes de Leaflet
+    <div role="dialog" aria-modal="true" className="fixed inset-0 z-[10000] flex items-end sm:items-center justify-center">
       <div className="absolute inset-0 bg-black/30" onClick={onClose} aria-hidden="true" />
       <div className="relative bg-white w-full sm:max-w-md sm:rounded-xl2 sm:shadow-soft sm:border sm:border-gray-200 p-4 sm:p-5">
         <div className="flex items-center justify-between">
